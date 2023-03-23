@@ -3,29 +3,51 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-class Calculadora {
-    static double dividir(double a, double b) {
-        // if (capital <= 0) error: capital no valido
-        // if (plazo <= 0) error: plazo no valido
+class SimuladorHipoteca {
 
-        double interes = 0;
+    interface Callback {
+        void errorPlazo();
+        void errorCapital();
+        void okCuota(double cuota);
+    }
 
-        try {
-            // obtener 'interes' del banco...
-            interes = Double.parseDouble(HttpClient.newHttpClient().send(HttpRequest.newBuilder().uri(URI.create("https://fakebank-tan.vercel.app/api/get-interest")).GET().build(), HttpResponse.BodyHandlers.ofString()).body());
-        } catch (Exception e) {
-            // error obteniendo interes
+    static void calcularCuota(double capital, double plazo, Callback callback) {
+        if (plazo == 0) {
+            callback.errorPlazo();
         }
+        else if (capital == 0){
+            callback.errorCapital();
+        } else {
+            double interes = 0;
 
-        //return a/b;
-        return a*interes/12/(1-Math.pow(1+(interes/12),-b*12));
+            try { interes = Double.parseDouble(HttpClient.newHttpClient().send(HttpRequest.newBuilder().uri(URI.create("https://fakebank-tan.vercel.app/api/get-interest")).GET().build(), HttpResponse.BodyHandlers.ofString()).body());} catch (Exception e) {}
+
+            callback.okCuota(capital*interes/12/(1-Math.pow(1+(interes/12),-plazo*12)));
+        }
+    }
+}
+
+class Usuario implements SimuladorHipoteca.Callback {
+
+    @Override
+    public void errorPlazo() {
+        System.out.println("PUES VALE");
+    }
+
+    @Override
+    public void errorCapital() {
+        System.out.println("PUES ME JODO");
+    }
+
+    @Override
+    public void okCuota(double cuota) {
+        System.out.println("POS LA CUOTA " + cuota + " ME PARECE MUY CARA");
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        double cuota = Calculadora.dividir(2000, 2);
-
-        System.out.println(cuota);
+        Usuario usuario = new Usuario();
+        SimuladorHipoteca.calcularCuota(2000, 2, usuario);
     }
 }

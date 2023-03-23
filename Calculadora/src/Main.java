@@ -26,8 +26,6 @@ class Usuario implements Calculadora.Callback {
 }
 
 
-
-
 public class Main {
     public static void main(String[] args) {
         Usuario usuario = new Usuario();

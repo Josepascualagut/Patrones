@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Calculadora/Calculadora.iml" filepath="$PROJECT_DIR$/Calculadora/Calculadora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Patrones.iml" filepath="$PROJECT_DIR$/Patrones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimuladorHipoteca/SimuladorHipoteca.iml" filepath="$PROJECT_DIR$/SimuladorHipoteca/SimuladorHipoteca.iml" />
+    </modules>
+  </component>
+</project>

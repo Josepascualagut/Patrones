@@ -31,17 +31,17 @@ class Usuario implements SimuladorHipoteca.Callback {
 
     @Override
     public void errorPlazo() {
-        System.out.println("PUES VALE");
+        System.out.println("PLAZO INVALIDO");
     }
 
     @Override
     public void errorCapital() {
-        System.out.println("PUES ME JODO");
+        System.out.println("CAPITAL INVALIDO");
     }
 
     @Override
     public void okCuota(double cuota) {
-        System.out.println("POS LA CUOTA " + cuota + " ME PARECE MUY CARA");
+        System.out.println("LA CUOTA ES " + cuota + "€");
     }
 }
 

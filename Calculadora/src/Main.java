@@ -16,12 +16,12 @@ class Calculadora {
 class Usuario implements Calculadora.Callback {
     @Override
     public void resultado(int resultado) {
-        System.out.println("PUES YA LO TENGO " + resultado);
+        System.out.println("EL RESULTADO ES " + resultado);
     }
 
     @Override
     public void esImposible() {
-        System.out.println("ES IMPOSIBLE");
+        System.out.println("CALCULO IMPOSIBLE");
     }
 }
 
